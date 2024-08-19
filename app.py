@@ -1,130 +1,70 @@
-import streamlit as st
-import pickle
+
+import streamlit as st 
 import numpy as np
 import sklearn as sns
 
-pipe = pickle.load(open("HRhelper.pkl",'rb'))
-scaler = pickle.load(open("scaler.pkl",'rb'))
+# import CustomerChurnPred
+import hiringPredictor
+import creditCard_Rashid
+import appDiabetes
+import fattyLiverPred
+import moodPred
+import newsClassifier
+import MovieRecommender
+import RealmePhonePrice
+import pwdStrengthPredictor
 
-# st.title("HR Interview Call Prediction -   AI Helper")
-# st.title("Here's your personal health check-up, get assured of Diabetes-free life.")
-#
-# name = st.text_input("Enter Candidate's name")
-# comp = st.selectbox("Select Company you have appplied for",['Amazon','Flipkart','Zoho','Paytm','Flipkart','Uber',
-#                                                             'Google','Microsoft','Paypal'])
-# gender = st.selectbox("Select your Gender",['Male','Female'])
-#
-# age = st.number_input("Please Enter your age (in years)")
-#
-# years_of_experience = st.selectbox("Enter your Industry experience",['<= 1 year','>1 and <2 years','>2 and <3 years',
-#                                                                      '>3 and <5 years','>= 5 years'])
-#
-# st.title("Enter all the scores out of 1")
-#
-# functional_competency_score = st.number_input("Enter your functional_competency_score ")
-#
-# top1_skills_score = st.number_input("Enter your top1_skills_score ")
-# top2_skills_score = st.number_input("Enter your top2_skills_score ")
-# top3_skills_score = st.number_input("Enter your top3_skills_score ")
-#
-# behavior_competency_score =  st.number_input("Enter your behavior_competency_score ")
-# top1_behavior_skill_score = st.number_input("Enter your top1_behavior_skill_score ")
-# top2_behavior_skill_score = st.number_input("Enter your top2_behavior_skill_score ")
-# top3_behavior_skill_score = st.number_input("Enter your top3_behavior_skill_score ")
-#
-# if st.button('Click to Know whether u would be called or not'):
-#
-#     if years_of_experience == '<= 1 year':
-#         years_of_experience = 1
-#     elif years_of_experience== '>1 and <2 years':
-#         years_of_experience = 1.5
-#     elif years_of_experience== '>2 and <3 years':
-#         years_of_experience = 2.5
-#     elif years_of_experience == '>3 and <5 years':
-#         years_of_experience = 3.9
-#     else:
-#         years_of_experience = 5.2
-#
-#     query = [years_of_experience,functional_competency_score,top1_skills_score,top2_skills_score,top3_skills_score,
-#              behavior_competency_score, top1_behavior_skill_score,top2_behavior_skill_score,top3_behavior_skill_score]
-#
-#     query = np.array(query)
-#     query = query.reshape(1, -1)
-#     query1 = scaler.transform(query)
-#
-#     if(pipe.predict(query1)[0]==1):
-#         st.title("Congratulations, You are selected for the  HR Interview 😊 ")
-#
-#     else:
-#         st.title('Sorry,You are not selected for HR Interview 😔')
-#
-#         st.title("WORK HARD FOR THE NEXT COMPANY")
-#
-#         st.title("Practice all SDE Sheet Problems on this site!")
-#
-#         st.write( "Link:- [SDE SHEET- 250 DSA QUESTIONS](https://practice.geeksforgeeks.org/explore?page=1&curated[]=1&sortBy=submissions&curated_names[]=SDE%20Sheet)")
+usermenu2 = st.sidebar.selectbox("Which model do you want to utilise??",['ML MODELS','DL MODELS','NLP MODELS',"MEDICAL AI Assistants"])
 
-def funcCall():
+if usermenu2== 'ML MODELS':
 
-    st.title("HR Interview Call Prediction -   AI Helper")
-    # st.title("Here's your personal health check-up, get assured of Diabetes-free life.")
+    usermenu = st.sidebar.radio("CHOOSE THE ML MODEL TO UTILISE",["CREDIT CARD FRAUD PREDICTOR",
+                        "HR INTERVIEW PREDICTOR","CUSTOMER CHURN PREDICTION","REALME PRICE PREDICTOR",
+                                                                  "Password Strength Predictor"])
 
-    name = st.text_input("Enter Candidate's name")
-    comp = st.selectbox("Select Company you have appplied for",
-                        ['Amazon', 'Flipkart', 'Zoho', 'Paytm', 'Flipkart', 'Uber',
-                         'Google', 'Microsoft', 'Paypal'])
-    gender = st.selectbox("Select your Gender", ['Male', 'Female'])
+elif usermenu2 == 'NLP MODELS':
 
-    age = st.number_input("Please Enter your age (in years)")
+    usermenu = st.sidebar.radio("CHOOSE THE NLP MODEL TO UTILISE", ["MOOD PREDICTOR","NEWS CLASSIFIER"])
 
-    years_of_experience = st.selectbox("Enter your Industry experience",
-                                       ['<= 1 year', '>1 and <2 years', '>2 and <3 years',
-                                        '>3 and <5 years', '>= 5 years'])
+elif usermenu2 == "MEDICAL AI Assistants":
 
-    st.title("Enter all the scores out of 1")
+    usermenu = st.sidebar.radio("CHOOSE THE Medical AI Model To Assist You",["DIABETES PREDICTOR - MEDICAL ASSISTANT","FATTY LIVER DISEASE PREDICTOR"])
 
-    functional_competency_score = st.number_input("Enter your functional_competency_score ")
+else:
+    st.sidebar.title("SORRY SIR/MAM, I have only 1 Deep Learning Model")
 
-    top1_skills_score = st.number_input("Enter your top1_skills_score ")
-    top2_skills_score = st.number_input("Enter your top2_skills_score ")
-    top3_skills_score = st.number_input("Enter your top3_skills_score ")
+    st.sidebar.title("You will definitely find more models in your next visit :)")
 
-    behavior_competency_score = st.number_input("Enter your behavior_competency_score ")
-    top1_behavior_skill_score = st.number_input("Enter your top1_behavior_skill_score ")
-    top2_behavior_skill_score = st.number_input("Enter your top2_behavior_skill_score ")
-    top3_behavior_skill_score = st.number_input("Enter your top3_behavior_skill_score ")
+    usermenu = st.sidebar.radio("CHOOSE THE DL MODEL TO UTILISE", ['MOVIE RECOMMENDER SYSTEM'])
 
-    if st.button('Click to Know whether u would be called or not'):
+if usermenu== "HR INTERVIEW PREDICTOR":
+    hiringPredictor.funcCall()
 
-        if years_of_experience == '<= 1 year':
-            years_of_experience = 1
-        elif years_of_experience == '>1 and <2 years':
-            years_of_experience = 1.5
-        elif years_of_experience == '>2 and <3 years':
-            years_of_experience = 2.5
-        elif years_of_experience == '>3 and <5 years':
-            years_of_experience = 3.9
-        else:
-            years_of_experience = 5.2
+elif usermenu== "DIABETES PREDICTOR - MEDICAL ASSISTANT":
+    appDiabetes.funcCall()
 
-        query = [years_of_experience, functional_competency_score, top1_skills_score, top2_skills_score,
-                 top3_skills_score,
-                 behavior_competency_score, top1_behavior_skill_score, top2_behavior_skill_score,
-                 top3_behavior_skill_score]
+# elif usermenu == "CUSTOMER CHURN PREDICTION":
+#     CustomerChurnPred.funcCall()
 
-        query = np.array(query)
-        query = query.reshape(1, -1)
-        query1 = scaler.transform(query)
+elif usermenu== "MOOD PREDICTOR":
+    moodPred.funcCall()
 
-        if (pipe.predict(query1)[0] == 1):
-            st.title("Congratulations, You are selected for the  HR Interview 😊 ")
+elif usermenu== "NEWS CLASSIFIER":
+    newsClassifier.funccall()
 
-        else:
-            st.title('Sorry,You are not selected for HR Interview 😔')
+elif usermenu=='MOVIE RECOMMENDER SYSTEM':
+    MovieRecommender.funcCall()
 
-            st.title("WORK HARD FOR THE NEXT COMPANY")
+elif usermenu == "FATTY LIVER DISEASE PREDICTOR":
+    fattyLiverPred.assistUser()
 
-            st.title("Practice all SDE Sheet Problems on this site!")
+elif usermenu=="REALME PRICE PREDICTOR":
+    RealmePhonePrice.assistUser()
 
-            st.write(
-                "Link:- [SDE SHEET- 250 DSA QUESTIONS](https://practice.geeksforgeeks.org/explore?page=1&curated[]=1&sortBy=submissions&curated_names[]=SDE%20Sheet)")
+
+elif usermenu == "Password Strength Predictor":
+    pwdStrengthPredictor.assistUser()
+
+else:
+    creditCard_Rashid.funcCall()
+
