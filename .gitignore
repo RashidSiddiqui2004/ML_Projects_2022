@@ -1,0 +1,5 @@
+venv
+realmeImages
+.idea
+__pycache__
+*.pkl
